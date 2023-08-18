@@ -1,0 +1,174 @@
+
+/**
+ * ! usuario
+ */
+use("db_mongo_citas");
+db.createCollection("usuario", {
+    capped: true,
+    size: 5000,
+    max: 50,
+    validator: {
+        $jsonSchema: {
+            bsonType: 'object',
+            additionalProperties: false,
+            required: ['_id', 'usu_nombre', 'usu_primer_apellido', 'usu_telefono','usu_direccion','usu_tipodoc', 'usu_acudiente'],
+            properties: {
+                _id: {
+                    bsonType: "int",
+                    description: "ID del usuario"
+                },
+                usu_nombre: {
+                    bsonType: 'string',
+                    description: 'El usu_nombre_usuario es obligatorio',
+                },
+                usu_segundo_nombre: {
+                    bsonType: 'string',
+                    description: 'El usu_segundo_nombre es obligatorio',
+                },
+                usu_primer_apellido: {
+                    bsonType: 'string',
+                    description: 'El usu_primer_apellido es obligatorio'
+                },
+                usu_segundo_apellido: {
+                    bsonType: 'string',
+                    description: 'El usu_segundo_apellido es obligatorio'
+                },
+                usu_telefono: {
+                    bsonType: 'string',
+                    description: 'El usu_telefono es obligatorio',
+                    pattern: '^[0-9]{10}$'
+                },
+                usu_direccion: {
+                    bsonType: 'string',
+                    description: 'El usu_direccion es obligatorio'
+                },
+                usu_email: {
+                    bsonType: 'string',
+                    description: 'El usu_email no es obligatorio ni opcional pero el dato debe ser en formato string',
+                    pattern: '^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$'
+                },
+                usu_tipodoc: {
+                    bsonType: 'string',
+                    description: 'El usu_tipodoc no es obligatorio ni opcional pero el dato debe ser en formato string'
+                },
+                usu_genero: {
+                    bsonType: 'string',
+                    description: 'El usu_genero no es obligatorio ni opcional pero el dato debe ser en formato string'
+                },
+                usu_acudiente: {
+                    bsonType: 'int',
+                    description: 'El usu_acudiente es obligatorio y debe ser un numero entero'
+                }
+            }
+        }
+    }
+});
+
+/**
+ * ! acudiente
+ */
+use("db_mongo_citas");
+db.createCollection("acudiente", {
+    capped: true,
+    size: 5000,
+    max: 50,
+    validator: {
+        $jsonSchema: {
+            bsonType: 'object',
+            additionalProperties: false,
+            required: ['_id', 'acu_nombreCompleto', 'acu_telefono', 'acu_direccion'],
+            properties: {
+                _id: {
+                    bsonType: "int",
+                    description: "ID del usuario"
+                },
+                acu_nombreCompleto: {
+                    bsonType: 'string',
+                    description: 'El acu_nombreCompleto_usuario es obligatorio',
+                },
+                acu_telefono: {
+                    bsonType: 'string',
+                    description: 'El acu_telefono es obligatorio',
+                },
+                acu_direccion: {
+                    bsonType: 'string',
+                    description: 'El acu_direccion es obligatorio'
+                }
+            }
+        }
+    }
+});
+
+/**
+ * ! medico
+ */
+use("db_mongo_citas");
+db.createCollection("medico", {
+    capped: true,
+    size: 5000,
+    max: 50,
+    validator: {
+        $jsonSchema: {
+            bsonType: 'object',
+            additionalProperties: false,
+            required: ['_id', 'med_nombreCompleto', 'med_consultorio', 'med_especialidad'],
+            properties: {
+                _id: {
+                    bsonType: "int",
+                    description: "ID del usuario"
+                },
+                med_nombreCompleto: {
+                    bsonType: 'string',
+                    description: 'El med_nombreCompleto_usuario es obligatorio',
+                },
+                med_consultorio: {
+                    bsonType: 'string',
+                    description: 'El med_consultorio es obligatorio',
+                },
+                med_especialidad: {
+                    bsonType: 'string',
+                    description: 'El med_especialidad es obligatorio'
+                }
+            }
+        }
+    }
+});
+
+/**
+ * ! cita
+ */
+use("db_mongo_citas");
+db.createCollection("cita", {
+    capped: true,
+    size: 5000,
+    max: 50,
+    validator: {
+        $jsonSchema: {
+            bsonType: 'object',
+            additionalProperties: false,
+            required: ['_id', 'cit_fecha', 'cit_estado', 'cit_medico', 'cit_datosUsuario'],
+            properties: {
+                _id: {
+                    bsonType: "int",
+                    description: "ID del usuario"
+                },
+                cit_fecha: {
+                    bsonType: 'date',
+                    description: 'El cit_fecha_usuario es obligatorio',
+                },
+                cit_estado: {
+                    bsonType: 'string',
+                    description: 'El cit_estado es obligatorio',
+                },
+                cit_medico: {
+                    bsonType: 'int',
+                    description: 'El cit_medico es obligatorio'
+                },
+                cit_datosUsuario: {
+                    bsonType: 'int',
+                    description: 'El cit_datosUsuario es obligatorio'
+                }
+            }
+        }
+    }
+});
